@@ -3,13 +3,14 @@ import React, { useState } from "react";
 function Questionnaire({ addiction, setMoodHistory, email }) {
   const [mood, setMood] = useState(() => "");
   const [todayMood, setTodayMood] = useState(() => false);
+  const [textEntry, setTextEntry] = useState("");
 
-  function sendMood() {
-    if (mood && mood !== "") {
+  function sendQuestionnaireResponse() {
+    if (mood && mood !== "" && textEntry && textEntry !== "") {
       fetch("/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, mood }),
+        body: JSON.stringify({ email, mood, textEntry }),
       })
         .then((data) => data.json())
         .then((response) => {
@@ -20,7 +21,7 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
   }
 
   const questionnaire = (
-    <div>
+    <div class="questions">
       <span>
         <input
           type="radio"
@@ -48,8 +49,11 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
         <label htmlFor="great">Great</label>
       </span>
       <p>Describe your day :</p>
-      <textarea rows="5" cols="30"></textarea>
-      <button type="submit" onClick={() => sendMood()}>
+      <textarea
+        class="text-entry"
+        onChange ={(e) => setTextEntry(e.target.value)}
+      ></textarea>
+      <button type="submit" onClick={() => sendQuestionnaireResponse()}>
         Submit
       </button>
     </div>

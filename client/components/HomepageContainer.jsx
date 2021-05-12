@@ -95,7 +95,6 @@ function HomepageContainer({
       fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data.meetings);
         for (let i = 0; i < 2; i++) {
           resources.push(<div>
             <p>Name: {data.meetings[i].title}</p>
@@ -106,8 +105,6 @@ function HomepageContainer({
         }
       })
     // }
-
-    console.log(resources)
     return (
         <div>
             <HeaderDiv>
