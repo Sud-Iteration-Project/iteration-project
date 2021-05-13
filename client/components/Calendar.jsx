@@ -54,7 +54,7 @@ const Day = styled.div`
   ${(props) =>
     props.isSelected &&
     css`
-      background: ;
+      background:;
     `}
 
     ${(props) =>
