@@ -64,7 +64,7 @@ userController.createUser = async (request, response, next) => {
     body.emergencyContactPhone,
     body.zipCode
   ];
-  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone, zipCode)
+  const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone, zip_code)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
   database.query(createUserQuery, userInformation, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.createUser.' });
