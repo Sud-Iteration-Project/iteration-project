@@ -75,7 +75,7 @@ function AuthContainer({
 
   return (
     <div className="auth-container">
-      <section id="inputFields">{renderThis}</section>
+      <div id="inputFields">{renderThis}</div>
     </div>
   );
 }

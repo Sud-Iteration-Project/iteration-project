@@ -96,28 +96,29 @@ function HomepageContainer({
 }) {
 
 
-    const str = 'SAMHSA';
-    const result = str.link('https://www.samhsa.gov/find-help/national-helpline')
-
-    // if(isLoggedIn === true) {
-      fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
-      .then(response => response.json())
-      .then(data => {
-        for (let i = 0; i < 5; i++) {
-          resources.push(<div className="meetingInfo">
-            <p className="meetingInfoDetails">
-              Name: {data.meetings[i].title}
-              <br />Address: {data.meetings[i].address}
-              <br />Status: {data.meetings[i].status}
-              <br />Type: {data.meetings[i].type}
-              <br /> Zoom ID: {data.meetings[i].zoom_id}
-              <br /> Zoom Link: {data.meetings[i].zoom_link}
-            </p>
-          </div>);
+    fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
+    .then(response => response.json())
+    .then(data => {
+      const filteredData = data.meetings.filter(meeting => {
+        if (meeting.zoom_link) {
+          return meeting;
         }
-      })
+      });
+      console.log("filtered", filteredData)
+      for (let i = 0; i < 10; i++) {
+        resources.push(<div className="meetingInfo">
+          <p className="meetingInfoDetails">
+            Name: {filteredData[i].title}
+            <br />Address: {filteredData[i].address}
+            <br />Status: {filteredData[i].status}
+            <br />Type: {filteredData[i].type}
+            <br />Zoom ID: {filteredData[i].zoom_id}
+            <br />Zoom Link: <a href={filteredData[i].zoom_link}>Click Here</a>
+          </p>
+        </div>);
+      }
+    });
 
-    // }
     return (
         <div>
             <HeaderDiv>
@@ -132,7 +133,7 @@ function HomepageContainer({
                   <Header2>
                     Resources
                   </Header2>
-                  {result}
+                  <a href = "https://www.samhsa.gov/find-help/national-helpline">SAMHSA</a>
                 </Card>
                 <Card>
                   <Header2>
@@ -144,6 +145,7 @@ function HomepageContainer({
                   <Header2>
                     Find Care
                   </Header2>
+                  <a href = "https://www.zocdoc.com/">Zocdoc</a>
                 </Card>
             </CardDiv>
         </div>

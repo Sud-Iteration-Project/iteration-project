@@ -20,7 +20,6 @@ userController.verifyUser = (request, response, next) => {
         return response.status(400).json({ userVerified: false, message: 'Password incorrect.' });
       }
       response.locals.user = result.rows;
-      console.log(result.rows);
       return next();
     });
   });
@@ -28,10 +27,11 @@ userController.verifyUser = (request, response, next) => {
 
 userController.getMoodHistory = (request, response, next) => {
   const userId = [response.locals.user[0].user_id];
-  const moonHistoryQuery = `SELECT mood, date, text FROM "public"."moods" where user_id = $1`;
-  database.query(moonHistoryQuery, userId, (error, result) => {
+  const moodHistoryQuery = `SELECT mood, date, text, attendAppointments, appointments, takeMedication, medications FROM "public"."moods" where user_id = $1`;
+  database.query(moodHistoryQuery, userId, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.getMoodHistory.' });
     response.locals.userMoodHistory = result.rows;
+    console.log(result.rows);
     return next();
   });
 };
@@ -49,10 +49,8 @@ userController.updateLastLoginDate = (request, response, next) => {
 
 userController.createUser = async (request, response, next) => {
   const body = request.body;
-  console.log('body in createUser', body);
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(body.password, saltRounds);
-  console.log('hashedPassword in createUser', hashedPassword);
   const userInformation = [
     body.firstName,
     body.age,
@@ -81,14 +79,26 @@ userController.getUserID = (request, response, next) => {
     response.locals.user = result.rows;
     response.locals.thismood = body.mood;
     response.locals.textEntry = body.textEntry
+    response.locals.attendAppointments = body.attendAppointments,
+    response.locals.appointments = body.appointments,
+    response.locals.takeMedication = body.takeMedication,
+    response.locals.medications = body.medications
     return next();
   });
 }
 
 userController.saveMood = (request, response, next) => {
-  const moodAndUserID = [response.locals.thismood, response.locals.user[0].user_id, response.locals.textEntry]
-  const saveMoodQuery = `INSERT INTO moods (mood, user_id, text)
-    VALUES ($1, $2, $3);`;
+  const moodAndUserID = [
+    response.locals.thismood,
+    response.locals.user[0].user_id,
+    response.locals.textEntry,
+    response.locals.attendAppointments,
+    response.locals.appointments,
+    response.locals.takeMedication,
+    response.locals.medications
+  ]
+  const saveMoodQuery = `INSERT INTO moods (mood, user_id, text, attendAppointments, appointments, takeMedication, medications)
+    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
   database.query(saveMoodQuery, moodAndUserID, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.saveMood.' });
     return next();

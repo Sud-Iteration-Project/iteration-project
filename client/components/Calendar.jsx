@@ -79,10 +79,9 @@ const Day = styled.div`
     
 const ExpandedDay = styled.div`
   width: 25%;
-  height: 200px;
+  height: 300px;
   padding-left: 10px;
   padding-right: 10px;
-  border: 1px solid #6a8d73;
 `;
 
 
@@ -130,11 +129,13 @@ function Calendar({ moodHistory }) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
 
-  function expandDay(textEntry, date) {
+  function expandDay(textEntry, appts, meds, date) {
     setDetails([
       <ExpandedDay>
         <p>Date: {date} </p>
         <p>Summary: {textEntry}</p>
+        <p>Attended Appointments/Meetings: {appts}</p>
+        <p>Took Medication: {meds}</p>
       </ExpandedDay>
     ]);
     console.log("clicked!")
@@ -169,12 +170,20 @@ function Calendar({ moodHistory }) {
             
               const moodDate = {};
               const textEntries = {};
+              const attendAppointments = {};
+              const appointmentEntries = {};
+              const takeMedication = {};
+              const medicationEntries = {}
             
               moodHistory.forEach((el) => {
                 let shortDate = el.date.slice(0, 10);
                 let newEl = Number(shortDate.split("-")[2]);
                 moodDate[newEl] = el.mood;
                 textEntries[newEl] = el.text;
+                attendAppointments[newEl] = el.attendappointments;
+                appointmentEntries[newEl] = el.appointments;
+                takeMedication[newEl] = el.takemedication;
+                medicationEntries[newEl] = el.medications;
               });
             
               return (
@@ -185,7 +194,10 @@ function Calendar({ moodHistory }) {
                   isNotGreat={moodDate[d] === "unwell" && month === 4}
                   isToday={d === today.getDate()}
                   isSelected={d === day}
-                  onClick={() => expandDay(textEntries[d], d)}
+                  onClick={() => expandDay(textEntries[d],
+                    appointmentEntries[d],
+                    medicationEntries[d],
+                    d)}
                 >
                   {d > 0 ? d : ""}
                 </Day>
