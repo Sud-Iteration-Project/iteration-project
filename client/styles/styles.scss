@@ -27,9 +27,16 @@ input {
   margin: 3px;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .questionnaire {
-  display: grid;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 25%;
   height: auto;
   border: 1px solid black;
@@ -37,5 +44,39 @@ input {
   background: white;
   padding-top: 50px;
   padding-bottom: 50px;
+  // padding-left: 5px;
+  // padding-right: 5px;
   margin: auto;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-entry {
+  height: 100px;
+  padding-top: 0;
+  padding-left: 0;
+}
+
+.frame {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.meetingInfo {
+  width: 90%;
+  margin: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.meetingInforDetails {
+  font-size: 8px;
 }
