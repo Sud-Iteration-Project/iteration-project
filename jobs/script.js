@@ -11,7 +11,7 @@ const bree = new Bree({
   jobs: [
     {
       name: 'checkLastLogin',
-      // interval: '1m',
+      // interval: 'at 12:00 pm',
       // path: path.join(__dirname, 'checkLastLogin'),
       // root: false
     }
@@ -19,4 +19,4 @@ const bree = new Bree({
 });
 
 bree.start();
-console.log("script ran");
+// console.log("script ran");

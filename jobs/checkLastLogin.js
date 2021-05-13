@@ -22,9 +22,10 @@ const threeDays = calculateThreeDaysAgo();
 
 const loginQuery = `SELECT emergencycontactname, emergencycontactphone, firstname FROM users
 WHERE lastlogindate <= '${threeDays}';`;
-// const loginQuery = `SELECT * FROM "public"."users";`;
+const testQuery = `SELECT emergencycontactname, emergencycontactphone, firstname FROM users
+WHERE lastlogindate >= CURRENT_DATE;`;
 
-database.query(loginQuery, (error, result) => {
+database.query(testQuery, (error, result) => {
   // if (error) return error; // next({ status: 500, message: 'Error in checkLastLogin.' });
   
   console.log(result.rows);
