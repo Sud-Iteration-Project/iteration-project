@@ -11,6 +11,7 @@ const bree = new Bree({
   jobs: [
     {
       name: 'checkLastLogin',
+      timeout: '1m'
       // interval: 'at 12:00 pm',
       // path: path.join(__dirname, 'checkLastLogin'),
       // root: false
