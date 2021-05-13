@@ -24,14 +24,19 @@ function MainContainer() {
         <NavBar
           setFirstName={setFirstName}
           age={age}
+          setAge={setAge}
           emergencyContactName={emergencyContactName}
           emergencyContactPhone={emergencyContactPhone}
           setEmergencyContactName={setEmergencyContactName}
           setEmergencyContactPhone={setEmergencyContactPhone}
           missedLogin={missedLogin}
+          setMissedLogin={setMissedLogin}
           addiction={addiction}
+          setAddiction={setAddiction}
           moodHistory={moodHistory}
+          setMoodHistory={setMoodHistory}
           isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
           zipCode = {zipCode}
           setZipCode = {setZipCode}
         />
