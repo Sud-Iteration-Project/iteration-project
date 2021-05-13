@@ -96,8 +96,9 @@ function HomepageContainer({
 }) {
 
 
-    const str = 'SAMHSA';
-    const result = str.link('https://www.samhsa.gov/find-help/national-helpline')
+    // const str = new String('SAMHSA');
+    // const url = 'https://www.samhsa.gov/find-help/national-helpline';
+    // const result = str.link(url);
 
     // if(isLoggedIn === true) {
       fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
@@ -110,8 +111,8 @@ function HomepageContainer({
               <br />Address: {data.meetings[i].address}
               <br />Status: {data.meetings[i].status}
               <br />Type: {data.meetings[i].type}
-              <br /> Zoom ID: {data.meetings[i].zoom_id}
-              <br /> Zoom Link: {data.meetings[i].zoom_link}
+              <br />Zoom ID: {data.meetings[i].zoom_id}
+              <br />Zoom Link: {data.meetings[i].zoom_link}
             </p>
           </div>);
         }
@@ -132,7 +133,7 @@ function HomepageContainer({
                   <Header2>
                     Resources
                   </Header2>
-                  {result}
+                  {<a href = "https://www.samhsa.gov/find-help/national-helpline">SAMHSA</a>}
                 </Card>
                 <Card>
                   <Header2>

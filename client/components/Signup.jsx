@@ -169,7 +169,7 @@ function Signup({
           value="heroine abuse"
           onChange={(e) => setAddiction(e.target.value)}
         />
-        <label htmlFor="heroine">Heroine Abuse</label>
+        <label htmlFor="heroine">Heroin Abuse</label>
         <br></br>
         <input
           type="radio"

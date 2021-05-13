@@ -5,8 +5,9 @@ const app = express();
 
 const userController = require("./controllers/userController");
 
-app.use(express.static("../client/assets"));
 app.use(express.json());
+app.use(express.static("../client/assets"));
+
 
 // app.get("/", (request, response) => {
 //   response.status(200).sendFile(path.join(__dirname, "../index.html"));
@@ -39,10 +40,10 @@ app.post(
   }
 );
 
-app.post("/signup", userController.createUser, (request, response) => {
-  return response
-    .status(200)
-    .json({ newUserCreated: true, message: "New user successfully created." });
+app.post("/signup",
+  userController.createUser,
+  (request, response) => {
+  return response.status(200).json({ newUserCreated: true, message: "New user successfully created." });
 });
 
 app.post(
@@ -51,6 +52,7 @@ app.post(
   userController.saveMood,
   userController.getMoodHistory,
   (request, response) => {
+    console.log(response.locals.userMoodHistory);
     return response
       .status(200)
       .json({ moodHistory: response.locals.userMoodHistory });

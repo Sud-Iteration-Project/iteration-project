@@ -14,7 +14,15 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
       fetch("/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, mood, textEntry }),
+        body: JSON.stringify({ 
+          email,
+          mood,
+          textEntry,
+          attendAppointments,
+          appointments,
+          takeMedication,
+          medications
+        }),
       })
         .then((data) => data.json())
         .then((response) => {
@@ -25,17 +33,17 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
   }
 
   const questionnaire = (
-    <div class="questions">
+    <div className="questions">
       <p>How are you feeling today?</p>
       <span>
         <input
           type="radio"
-          id="unwell"
-          value="unwell"
+          id="great"
+          value="great"
           name="mood"
           onChange={(e) => setMood(e.target.value)}
         ></input>
-        <label htmlFor="unwell">Unwell</label>
+        <label htmlFor="great">Great</label>
         <input
           type="radio"
           id="neutral"
@@ -46,16 +54,16 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
         <label htmlFor="neutral">Neutral</label>
         <input
           type="radio"
-          id="great"
-          value="great"
+          id="unwell"
+          value="unwell"
           name="mood"
           onChange={(e) => setMood(e.target.value)}
         ></input>
-        <label htmlFor="great">Great</label>
+        <label htmlFor="unwell">Unwell</label>
       </span>
       <p>Describe your day :</p>
       <textarea
-        class="text-entry"
+        className="text-entry"
         onChange ={(e) => setTextEntry(e.target.value)}
       ></textarea>
       <p>Have you or will you be attending any appointments and/or meetings today?</p>
@@ -79,7 +87,7 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
       </span>
       <p>If so, which appointments and/or meetings have you or will you attend today?</p>
       <textarea
-        class="text-entry"
+        className="text-entry"
         onChange ={(e) => setAppointments(e.target.value)}
       ></textarea>
       <p>Have you or will you be taking any prescribed medication today?</p>
@@ -103,7 +111,7 @@ function Questionnaire({ addiction, setMoodHistory, email }) {
       </span>
       <p>If so, which medication have you or will you be taking today?</p>
       <textarea
-        class="text-entry"
+        className="text-entry"
         onChange ={(e) => setMedications(e.target.value)}
       ></textarea>
       <div className="submitButton">
