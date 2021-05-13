@@ -5,8 +5,9 @@ export const Nav = styled.nav`
   background: #6a8d73;
   height: 80px;
   display: flex;
-  justify-content: space-between;
-  padding: 0.5rem calc((100vw - 1000px) / 2);
+  justify-content: space-evenly;
+  padding-right: 10%;
+  padding-left: 10%;
   z-index: 10;
 `;
 export const NavLink = styled(Link)`
@@ -17,16 +18,12 @@ export const NavLink = styled(Link)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-
-  &.active {
-    color: #f4fdd9;
-  }
 `;
 
 export const NavMenu = styled.div`
   display: flex;
-  align-items: center;
-  margin-right: -24px;
+  align-items: space-between;
+  flex-grow: 2;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -36,7 +33,7 @@ export const NavMenu = styled.div`
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
-  margin-right: 24px;
+  
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -45,18 +42,14 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
-  background: #e4ffe1;
+  background: #fff;
   padding: 10px 22px;
-  color: #000000;
+  color: #F0A868;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
   border: none;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
-  }
 `;

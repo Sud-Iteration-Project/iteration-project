@@ -72,7 +72,7 @@ app.use((error, request, response, next) => {
   };
   const ourError = Object.assign(defaultError, error);
 
-  console.log(ourError.log);
+  console.log(ourError.status);
 
   response.status(ourError.status).send(ourError.message);
 });

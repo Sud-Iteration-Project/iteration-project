@@ -82,7 +82,6 @@ const ExpandedDay = styled.div`
   height: 300px;
   padding-left: 10px;
   padding-right: 10px;
-  border: 1px solid #6a8d73;
 `;
 
 
