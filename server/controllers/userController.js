@@ -1,7 +1,6 @@
 
 const database = require('../models/userModels');
 const bcrypt = require('bcrypt');
-const sendSms = require('../api/send_sms');
 
 
 const userController = {};

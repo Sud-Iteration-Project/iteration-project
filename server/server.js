@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 
 const userController = require("./controllers/userController");
+const jobHandler = require('../jobs/script');
 
 app.use(express.json());
 app.use(express.static("../client/assets"));
