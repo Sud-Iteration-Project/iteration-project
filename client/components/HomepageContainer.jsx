@@ -53,24 +53,29 @@ const CardDiv = styled.div`
   border-radius: 5px;
 `
 const Card = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 80%;
   width: 30vw;
-  text-align: center;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
   background: #FFE8C2;
   /* padding-left: 20px; */
-  padding-top: 4%;
+  /* padding-top: 4%; */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  border-radius: 5px; /* 5px rounded corners */
+  border-radius: 5px; /* 5px rounded corners */;
+  overflow: auto;
 `
 const Header2 = styled.div`
-  height: 10%;
+  /* height: 10%; */
+  font-size: 20px;
   width: 25vw;
   background: #fff;
   text-align: center;
   padding-top: 4%;
+  padding-bottom: 4%;
+  margin-bottom: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
@@ -91,23 +96,28 @@ function HomepageContainer({
 }) {
 
 
+    const str = 'SAMHSA';
+    const result = str.link('https://www.samhsa.gov/find-help/national-helpline')
+
     // if(isLoggedIn === true) {
       fetch(`https://api.aa.org.au/meetings.json?postcode=${zipCode}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data.meetings);
-        for (let i = 0; i < 2; i++) {
-          resources.push(<div>
-            <p>Name: {data.meetings[i].title}</p>
-            <p>Address: {data.meetings[i].address}</p>
-            <p>Status: {data.meetings[i].status}</p>
-            <p>Type: {data.meetings[i].type}</p>
+        for (let i = 0; i < 5; i++) {
+          resources.push(<div className="meetingInfo">
+            <p className="meetingInfoDetails">
+              Name: {data.meetings[i].title}
+              <br />Address: {data.meetings[i].address}
+              <br />Status: {data.meetings[i].status}
+              <br />Type: {data.meetings[i].type}
+              <br /> Zoom ID: {data.meetings[i].zoom_id}
+              <br /> Zoom Link: {data.meetings[i].zoom_link}
+            </p>
           </div>);
         }
       })
-    // }
 
-    console.log(resources)
+    // }
     return (
         <div>
             <HeaderDiv>
@@ -122,16 +132,17 @@ function HomepageContainer({
                   <Header2>
                     Resources
                   </Header2>
+                  {result}
                 </Card>
                 <Card>
                   <Header2>
-                    Find Care
+                    Meeting Information
                   </Header2>
                   {resources}
                 </Card>
                 <Card>
                   <Header2>
-                    Ongoing Health Services
+                    Find Care
                   </Header2>
                 </Card>
             </CardDiv>

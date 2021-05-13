@@ -29,7 +29,7 @@ userController.verifyUser = (request, response, next) => {
 
 userController.getMoodHistory = (request, response, next) => {
   const userId = [response.locals.user[0].user_id];
-  const moonHistoryQuery = `SELECT mood, date FROM "public"."moods" where user_id = $1`;
+  const moonHistoryQuery = `SELECT mood, date, text FROM "public"."moods" where user_id = $1`;
   database.query(moonHistoryQuery, userId, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.getMoodHistory.' });
     response.locals.userMoodHistory = result.rows;
@@ -66,7 +66,6 @@ userController.createUser = async (request, response, next) => {
   ];
   const createUserQuery = `INSERT INTO users (firstName, age, email, password, addiction, emergencyContactName, emergencyContactPhone, zipCode)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
-  console.log('userInfo', userInformation);
   database.query(createUserQuery, userInformation, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.createUser.' });
     return next();
@@ -82,14 +81,15 @@ userController.getUserID = (request, response, next) => {
     if (error) return next({ status: 500, message: 'Error in userController.getUserID.' });
     response.locals.user = result.rows;
     response.locals.thismood = body.mood;
+    response.locals.textEntry = body.textEntry
     return next();
   });
 }
 
 userController.saveMood = (request, response, next) => {
-  const moodAndUserID = [response.locals.thismood, response.locals.user[0].user_id]
-  const saveMoodQuery = `INSERT INTO moods (mood, user_id)
-    VALUES ($1, $2);`;
+  const moodAndUserID = [response.locals.thismood, response.locals.user[0].user_id, response.locals.textEntry]
+  const saveMoodQuery = `INSERT INTO moods (mood, user_id, text)
+    VALUES ($1, $2, $3);`;
   database.query(saveMoodQuery, moodAndUserID, (error, result) => {
     if (error) return next({ status: 500, message: 'Error in userController.saveMood.' });
     return next();
