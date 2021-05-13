@@ -52,7 +52,7 @@ const Day = styled.div`
   ${(props) =>
     props.isSelected &&
     css`
-      background: ;
+      background:;
     `}
 
     ${(props) =>
@@ -119,7 +119,7 @@ function Calendar({ moodHistory }) {
   const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
 
   return (
-    <Frame>
+    <Frame className="frame">
       <Header>
         <Button onClick={() => setDate(new Date(year, month - 1, day))}>
           Prev
